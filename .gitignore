@@ -1,1 +1,15 @@
+# Rust build artifacts
 /target
+Cargo.lock
+
+# Locally downloaded assets
+/resources
+/npm_tmp
+node-*.tar.gz
+
+# IDE metadata
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store

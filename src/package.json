@@ -1,0 +1,13 @@
+{
+  "name": "mermaid-render",
+  "version": "1.0.0",
+  "description": "Wrapper for Mermaid CLI",
+  "main": "mmdc_wrapper.js",
+  "type": "commonjs",
+  "dependencies": {
+    "@mermaid-js/mermaid-cli": "^10.9.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

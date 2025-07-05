@@ -1,6 +1,23 @@
 [package]
 name = "mermaid_render"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
 
 [dependencies]
+# For robust and easy error handling
+anyhow = "1.0"
+
+# For cross-platform clipboard access (replaces pyperclip)
+arboard = "3.2"
+
+# To bundle the Node binary and scripts into our app (critical!)
+rust-embed = "8.0"
+
+# For creating temporary directories to run our bundled assets
+tempfile = "3.8"
+
+# For showing native file-picker dialogs (replaces Tkinter)
+rfd = "0.14"
+
+# For validating diagram types (optional but good practice)
+lazy_static = "1.4"
