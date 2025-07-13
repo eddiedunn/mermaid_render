@@ -1,12 +1,12 @@
 # Mermaid Render
 
-A standalone Rust application that renders Mermaid diagrams to PNG files without requiring Node.js or Mermaid CLI to be installed on the system.
+A desktop application built with Rust and Tauri that lets you edit and render Mermaid diagrams without needing Node.js or the Mermaid CLI installed on your system.
 
 ## Features
 
+- Interactive Svelte interface with an editor and live preview
 - Renders Mermaid diagrams from clipboard or file input
 - Bundles Node.js and Mermaid CLI for a zero-dependency experience
-- Simple command-line interface
 - Cross-platform support (tested on macOS Apple Silicon)
 
 ## Prerequisites
@@ -36,36 +36,23 @@ A standalone Rust application that renders Mermaid diagrams to PNG files without
    npm run build
    cd ..
    ```
-4. Build the release binary:
+4. Build and run the application:
    ```bash
-   cargo build --release
+   cargo tauri dev
    ```
+   For a release build, use `cargo build --release`.
 
-The binary will be available at `./target/release/mermaid_render`.
+The compiled binary will be available at `./target/release/mermaid_render`.
 
 ## Usage
 
-### From Clipboard
-1. Copy a Mermaid diagram to your clipboard, for example:
-   ```mermaid
-   graph TD;
-       A-->B;
-       B-->C;
-       C-->A;
-   ```
-
-2. Run the application:
+1. Run the application:
    ```bash
-   ./target/release/mermaid_render
+   cargo tauri dev
    ```
 
-3. The rendered diagram will be saved as `diagram.png` in the current directory.
-
-### From File
-```bash
-echo 'graph TD; A-->B; B-->C; C-->A;' > example.mmd
-./target/release/mermaid_render --input example.mmd --output output.png
-```
+2. Edit the diagram in the left pane and view the live preview on the right.
+   Click **Export to File** to save the diagram as PNG or SVG.
 
 ## How It Works
 
