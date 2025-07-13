@@ -15,6 +15,10 @@ echo "--- Preparing assets for mermaid_render ---"
 
 # 1. Create the resources directory
 echo "1. Creating './${RESOURCES_DIR}' directory..."
+if [ -f "${RESOURCES_DIR}/node" ] && [ -f "${RESOURCES_DIR}/@mermaid-js/mermaid-cli/dist/cli.js" ]; then
+    echo "Resources already present. Skipping download."
+    exit 0
+fi
 rm -rf "${RESOURCES_DIR}"  # Clean up any existing resources
 mkdir -p "${RESOURCES_DIR}"
 
