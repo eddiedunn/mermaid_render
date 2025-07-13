@@ -8,7 +8,7 @@ use rust_embed::RustEmbed;
 use std::fs;
 use std::path::Path;
 use std::process::Command;
-use tauri::Manager;
+// Manager is not used directly, so we can remove this import
 
 #[derive(RustEmbed)]
 #[folder = "resources/"]
@@ -36,15 +36,28 @@ fn extract_assets(temp_path: &Path) -> Result<()> {
 #[tauri::command]
 async fn render_mermaid_to_file(
     source_text: String,
-    app_handle: tauri::AppHandle,
 ) -> Result<String, String> {
-    let output_file_path = match tauri::api::dialog::FileDialogBuilder::new(&app_handle)
-        .set_title("Save Diagram As")
-        .add_filter("PNG Image", &["png"])
-        .add_filter("SVG Image", &["svg"])
-        .set_file_name("diagram.png")
-        .save_file()
-    {
+    use std::sync::Mutex;
+    use std::sync::Arc;
+    
+    let dialog_result: Option<std::path::PathBuf> = {
+        let result = Arc::new(Mutex::new(None));
+        let result_clone = result.clone();
+        
+        tauri::api::dialog::FileDialogBuilder::new()
+            .set_title("Save Diagram As")
+            .add_filter("PNG Image", &["png"])
+            .add_filter("SVG Image", &["svg"])
+            .set_file_name("diagram.png")
+            .save_file(move |file_path| {
+                *result_clone.lock().unwrap() = file_path;
+            });
+            
+        let result = result.lock().unwrap().take();
+        result
+    };
+    
+    let output_file_path = match dialog_result {
         Some(path) => path,
         None => return Ok("Save cancelled by user.".to_string()),
     };
