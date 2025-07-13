@@ -10,6 +10,10 @@ NODE_URL="https://nodejs.org/dist/v${NODE_VERSION}/${NODE_FILENAME}.tar.gz"
 
 # Clean up and create directories
 echo "1. Setting up directories..."
+if [ -f "${RESOURCES_DIR}/node" ] && [ -f "${RESOURCES_DIR}/node_modules/.bin/mmdc" ]; then
+    echo "Resources already present. Skipping download."
+    exit 0
+fi
 rm -rf "${RESOURCES_DIR}"
 mkdir -p "${RESOURCES_DIR}/nodejs"
 

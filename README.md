@@ -22,13 +22,21 @@ A standalone Rust application that renders Mermaid diagrams to PNG files without
    cd mermaid_render
    ```
 
-2. Run the setup script to download and prepare the required assets:
+2. Run the setup script to download and prepare the required assets. The script
+   uses a cache so assets are only downloaded the first time:
    ```bash
    chmod +x setup_assets.sh
    ./setup_assets.sh
    ```
 
-3. Build the release binary:
+3. Install the frontend dependencies and build the UI:
+   ```bash
+   cd frontend
+   npm install
+   npm run build
+   cd ..
+   ```
+4. Build the release binary:
    ```bash
    cargo build --release
    ```
