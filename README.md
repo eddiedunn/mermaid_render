@@ -22,12 +22,35 @@ A desktop application built with Rust and Tauri that lets you edit and render Me
    cd mermaid_render
    ```
 
-2. Run the setup script to download and prepare the required assets. The script
+2. Install all dependencies:
+   ```bash
+   make install
+   ```
+   This will install both frontend and backend dependencies.
+
+3. Run the setup script to download and prepare the required assets. The script
    uses a cache so assets are only downloaded the first time:
    ```bash
    chmod +x setup_assets.sh
    ./setup_assets.sh
    ```
+
+## Development
+
+### Using Makefile
+
+This project includes a Makefile with common development commands:
+
+- `make install` - Install all dependencies
+- `make frontend-install` - Install frontend dependencies
+- `make frontend-dev` - Start frontend development server
+- `make frontend-build` - Build frontend for production
+- `make backend-dev` - Build backend in debug mode
+- `make backend-release` - Build backend in release mode
+- `make run` - Run in development mode
+- `make run-release` - Run in release mode
+- `make test` - Run tests
+- `make clean` - Clean build artifacts
 
 3. Install the frontend dependencies and build the UI:
    ```bash
